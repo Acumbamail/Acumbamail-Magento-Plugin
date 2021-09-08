@@ -2,20 +2,11 @@
 <config>
   <modules>
     <Acumbamail_Subscription>
-      <version>1.0.0</version>
+      <version>1.1.0</version>
     </Acumbamail_Subscription>
   </modules>
 
   <frontend>
-    <routers>
-      <subscription>
-        <use>standard</use>
-        <args>
-          <module>Acumbamail_Subscription</module>
-          <frontName>acumbamail</frontName>
-        </args>
-      </subscription>
-    </routers>
     <events>
       <acumbamail_hook_left_collumn>
 	<observers>
@@ -39,36 +30,47 @@
   <adminhtml>
     <menu>
       <acumbamail module="subscription">
-        <title>Acumbamail</title>
-        <sort_order>71</sort_order>              
-        <children>
+	<title>Acumbamail</title>
+	<sort_order>71</sort_order>
+	<children>
           <items module="subscription">
-            <title>Configuración</title>
+            <title>Configuracion</title>
             <sort_order>0</sort_order>
             <action>subscription/adminhtml_configuration</action>
           </items>
-        </children>
+	</children>
       </acumbamail>
     </menu>
+
     <acl>
       <resources>
-        <admin>
+	<admin>
           <children>
             <system>
               <children>
-                <config>
+		<config>
                   <children>
-                        <acumbamail_form translate="title" module="subscription">
-                          <title>Acumbamail Options</title>
-                        </acumbamail_form>
+                    <extension>
+                      <title>Acumbamail Options</title>
+                    </extension>
                   </children>
-                </config>
+		</config>
               </children>
             </system>
           </children>
-        </admin>
+	</admin>
       </resources>
     </acl>
+
+    <translate>
+      <modules>
+	<Acumbamail_Subscription>
+	  <files>
+	    <default>Acumbamail_Subscription.csv</default>
+	  </files>
+	</Acumbamail_Subscription>
+      </modules>
+    </translate>
   </adminhtml>
 
   <global>
@@ -83,6 +85,18 @@
       </subscription>
     </helpers>
   </global>
+
+  <admin>
+    <routers>
+      <subscription>
+        <use>admin</use>
+        <args>
+          <module>Acumbamail_Subscription</module>
+          <frontName>admin_subscription</frontName>
+        </args>
+      </subscription>
+    </routers>
+  </admin>
 
   <depends>
     <Mage_Adminhtml/>
