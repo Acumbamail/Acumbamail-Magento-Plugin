@@ -1,6 +1,6 @@
 <?php
 
-require 'lib/Acumbamail/acumbamail.class.php';
+require 'Acumbamail/acumbamail.class.php';
 
 class Acumbamail_Subscription_Block_Adminhtml_Form_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
@@ -51,7 +51,7 @@ class Acumbamail_Subscription_Block_Adminhtml_Form_Edit_Form extends Mage_Adminh
         if ($auth_token != '') {
             $lists = $api->getLists();
             if ($lists != '' or count($lists)) {
-                $select_values = array(-1 => '-- Seleccione lista --');
+                $select_values = array(-1 => $helper->__('-- Seleccione lista --'));
                 $selected_value = -1;
 
                 foreach ($lists as $key => $list) {
@@ -73,7 +73,7 @@ class Acumbamail_Subscription_Block_Adminhtml_Form_Edit_Form extends Mage_Adminh
             }
             else {
                 $fieldset->addField('note_list', 'note', array(
-                    'text' => $helper->__('Su usuario no posee ninguna lista o el auth token introducido no es válido'),
+                    'text' => $helper->__('El usuario no ha creado ninguna lista o el auth token no es válido'),
                 ));
                 Mage::getConfig()->deleteConfig('acumbamail_form/acumbamail_group/acumbamail_list');
                 Mage::getConfig()->deleteConfig('acumbamail_form/acumbamail_group/acumbamail_form');
@@ -90,7 +90,7 @@ class Acumbamail_Subscription_Block_Adminhtml_Form_Edit_Form extends Mage_Adminh
             $forms = $api->getForms($acumbamail_list);
             Mage::log("Formularios: " . $forms);
             if (count($forms)) {
-                $select_values = array(-1 => '-- Seleccione Formulario --');
+                $select_values = array(-1 => $helper->__('-- Seleccione Formulario --'));
                 $selected_value = -1;
 
                 foreach ($forms as $key => $form) {
@@ -113,7 +113,7 @@ class Acumbamail_Subscription_Block_Adminhtml_Form_Edit_Form extends Mage_Adminh
             }
             else {
                 $fieldset->addField('note_form', 'note', array(
-                    'text' => $helper->__('La lista seleccionada no posee ningún formulario'),
+                    'text' => $helper->__('La lista seleccionada no tiene ningún formulario asociado'),
                 ));
                 Mage::getConfig()->deleteConfig('acumbamail_form/acumbamail_group/acumbamail_form');
             }

@@ -1,6 +1,6 @@
 <?php
 
-require 'lib/Acumbamail/acumbamail.class.php';
+require 'Acumbamail/acumbamail.class.php';
 
 class Acumbamail_Subscription_Block_Subscription 
 extends Mage_Page_Block_Html {
